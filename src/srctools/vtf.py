@@ -172,7 +172,7 @@ class ImageFormats(Enum):
     @property
     def is_compressed(self) -> bool:
         """Checks if the format is compressed in 4x4 blocks."""
-        return self.name.startswith('DXT') or self.name in ('ATI1N', 'ATI2N')
+        return self in _FORMAT_COMPRESSED
 
     @property
     def is_transparent(self) -> bool:
@@ -238,6 +238,15 @@ _FORMAT_TRANSPARENT = {
     ImageFormats.DXT1_ONEBITALPHA, ImageFormats.DXT5,
 } - {ImageFormats.BGRX5551, ImageFormats.BGRX8888}
 
+# Formats which are compressed
+_FORMAT_COMPRESSED = (
+    ImageFormats.DXT1,
+    ImageFormats.DXT1_ONEBITALPHA,
+    ImageFormats.DXT3,
+    ImageFormats.DXT5,
+    ImageFormats.ATI1N,
+    ImageFormats.ATI2N
+)
 
 class VTFFlags(Flag):
     """The various image flags that may be set."""
